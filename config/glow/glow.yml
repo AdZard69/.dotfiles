@@ -1,0 +1,15 @@
+# high-contrast Gruvbox Material style, matched to the kitty theme
+style: "/home/adzard/.config/glow/gruvbox-material.json"
+
+# mouse support (TUI-mode only)
+mouse: true
+
+# use pager to display markdown
+pager: true
+
+# word-wrap width. 0 = use the full terminal width.
+# these docs have wide tables; 80 shredded them.
+width: 110
+
+# show all files, including hidden and ignored.
+all: false

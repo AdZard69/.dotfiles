@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# kf — switch the kitty font live.
+#   kf              pick a font with fzf
+#   kf <name>       set font by exact family name
+#   kf - <size>     set size only
+#   kf list         list installed mono families
+set -euo pipefail
+
+CONF="$HOME/.config/kitty/font.conf"
+
+families() {
+  fc-list :spacing=mono family 2>/dev/null \
+    | tr ',' '\n' | sed 's/^ *//;s/ *$//' | grep -v '^$' | sort -u
+}
+
+current() { awk '/^font_family/{ $1=""; sub(/^ +/,""); print; exit }' "$CONF"; }
+cursize() { awk '/^font_size/{ print $2; exit }' "$CONF"; }
+
+apply() {
+  local fam="$1" size="$2"
+  # rewrite in place, preserving the rest of the file
+  local tmp; tmp=$(mktemp)
+  awk -v fam="$fam" -v size="$size" '
+    /^font_family/ { printf "font_family       %s\n", fam; next }
+    /^font_size/   { printf "font_size         %s\n", size; next }
+    { print }
+  ' "$CONF" > "$tmp" && mv "$tmp" "$CONF"
+
+  # live-reload every running kitty (no restart needed)
+  if pgrep -x kitty >/dev/null 2>&1; then
+    pkill -USR1 -x kitty || true
+    echo "→ $fam ${size}pt (reloaded)"
+  else
+    echo "→ $fam ${size}pt (saved; no kitty running)"
+  fi
+}
+
+case "${1:-}" in
+  list) families ;;
+  "")
+    command -v fzf >/dev/null || { echo "fzf not found; use: kf <family>" >&2; exit 1; }
+    sel=$(families | fzf --prompt="font ❯ " --height=40% --reverse \
+            --header="current: $(current) $(cursize)pt") || exit 0
+    [ -n "$sel" ] && apply "$sel" "$(cursize)"
+    ;;
+  -) apply "$(current)" "${2:?size required}" ;;
+  *) apply "$1" "${2:-$(cursize)}" ;;
+esac

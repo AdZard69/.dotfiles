@@ -1,0 +1,6 @@
+gui:
+  nerdFontsVersion: "3"    # you have one already for LazyVim
+  showFileTree: true
+  skipDiscardChangeWarning: false
+os:
+  editPreset: "nvim"

@@ -1,0 +1,14 @@
+# never commit these
+.ssh/
+.gnupg/
+*_history
+*.log
+*.bak
+*.bak-*
+*.pre-*
+*.swp
+.DS_Store
+
+# machine-local / regenerated
+config/nvim/.git/
+config/btop/btop.log
