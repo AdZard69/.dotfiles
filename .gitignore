@@ -1,6 +1,9 @@
 # never commit these
 .ssh/
 .gnupg/
+.secrets
+.env
+*.local
 *_history
 *.log
 *.bak
