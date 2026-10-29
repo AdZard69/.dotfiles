@@ -1,37 +1,87 @@
 {
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+
   "logo": {
     "type": "command-raw",
-    "source": "pokemon-colorscripts -n charizard -f mega-x --no-title",
+    "source": "pokemon-colorscripts --random --no-title",
     "padding": {
-      "top": 1,
-      "right": 4
+      "top": 0,
+      "right": 3
     }
   },
+
   "display": {
-    "separator": " "
+    "separator": "  ",
+    "key": {
+      "width": 10,
+      "paddingLeft": 0
+    },
+    "color": {
+      "separator": "#3b424a",
+      "output": "#c7ccd1"
+    }
   },
+
   "modules": [
-    "title",
-    "separator",
-    "os",
-    "host",
-    "kernel",
-    "uptime",
-    "packages",
-    "shell",
-    "de",
-    "wm",
-    "terminal",
+    {
+      "type": "custom",
+      "format": "    TRAINER TERMINAL",
+      "outputColor": "#e0ad55"
+    },
+
+    {
+      "type": "title",
+      "key": "  ",
+      "keyColor": "#56d6e0",
+      "color": {
+        "user": "#c7ccd1",
+        "at": "#59636b",
+        "host": "#7aa2f7"
+      }
+    },
+
+    {
+      "type": "os",
+      "key": "   OS",
+      "keyColor": "#56d6e0"
+    },
+
+    {
+      "type": "kernel",
+      "key": "   Kernel",
+      "keyColor": "#56d6e0"
+    },
+
     {
       "type": "cpu",
+      "key": "   CPU",
+      "keyColor": "#e0ad55",
       "format": "{name}"
     },
+
     {
-      "type": "gpu",
-      "format": "{name}"
+      "type": "memory",
+      "key": "   Memory",
+      "keyColor": "#e0ad55",
+      "format": "{used} / {total}"
     },
-    "memory",
-    "break",
-    "colors"
+
+    {
+      "type": "uptime",
+      "key": "  󰔚 Uptime",
+      "keyColor": "#56d6e0"
+    },
+
+    {
+      "type": "shell",
+      "key": "   Shell",
+      "keyColor": "#7aa2f7"
+    },
+
+    {
+      "type": "terminal",
+      "key": "   Terminal",
+      "keyColor": "#7aa2f7"
+    }
   ]
 }
