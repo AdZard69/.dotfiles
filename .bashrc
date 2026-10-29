@@ -127,3 +127,12 @@ if [[ $- == *i* ]]; then
 fi
 export PATH=$PATH:/usr/local/MATLAB/R2025b/bin
 . "$HOME/.cargo/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/adzard/.local/bin:$PATH"
+
+# Private local secrets (Twitter / X tokens, etc.)
+[ -f "$HOME/.secrets" ] && . "$HOME/.secrets"
+
+
