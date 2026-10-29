@@ -137,3 +137,21 @@ export PATH="$PATH:$FLUTTER_HOME/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
 export PATH="$PATH:$ANDROID_HOME/emulator"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/adzard/.local/bin:$PATH"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
+
+# Go
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+
+# Private local secrets (Twitter / X tokens, etc.)
+[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
+
+
